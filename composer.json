@@ -1,0 +1,22 @@
+{
+    "name": "abbadon1334/atk4-app-container",
+    "type": "package",
+    "description": "Agile Toolkit Container",
+    "homepage": "https://github.com/abbadon1334/atk4-container",
+    "license": "MIT",
+    "keywords": ["Container", "Agile Toolkit", "Atk4"],
+    "authors": [{
+        "email": "fdanti@gmail.com",
+        "name": "Francesco Danti"
+    }],
+    "require": {
+        "php" : ">=7.4.0",
+        "atk4/core": "^2.3",
+        "psr/container": "^2.0"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Atk4\\Container\\" : "src/"
+        }
+    }
+}
