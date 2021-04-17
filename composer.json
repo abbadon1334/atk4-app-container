@@ -11,7 +11,7 @@
     }],
     "require": {
         "php" : ">=7.4.0",
-        "atk4/core": "^2.3",
+        "atk4/core": "^2.4.0",
         "psr/container": "^2.0"
     },
     "autoload": {
