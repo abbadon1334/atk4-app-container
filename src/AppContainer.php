@@ -33,7 +33,7 @@ class AppContainer implements ContainerInterface
 
     public function has(string $id): bool
     {
-        return $this->get($id) !== null;
+        return null !== $this->get($id);
     }
 
     public function set(string $id, $object)
