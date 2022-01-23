@@ -18,5 +18,8 @@
         "psr-4" : {
             "Atk4\\Container\\" : "src/"
         }
+    },
+    "scripts": {
+        "fix": "php-cs-fixer fix"
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Atk4\Container;
 
-use Atk4\Core\ConfigTrait;
 use Atk4\Core\Factory;
 use Psr\Container\ContainerInterface;
 
@@ -15,14 +16,15 @@ class AppContainer implements ContainerInterface
         $this->config = new AppContainerConfig();
     }
 
-    public function readConfig(...$file) {
+    public function readConfig(...$file)
+    {
         $this->config->readConfig($file);
     }
 
     public function get(string $id)
     {
         $value = $this->config->getConfig($id);
-        if(is_callable($value)) {
+        if (is_callable($value)) {
             return $value();
         }
 
@@ -34,22 +36,27 @@ class AppContainer implements ContainerInterface
         return $this->get($id) !== null;
     }
 
-    public function set(string $id, $object) {
-        $this->config->setConfig($id,$object);
+    public function set(string $id, $object)
+    {
+        $this->config->setConfig($id, $object);
     }
 
-    public function addFactorySeed(string $key, array $seed, array $defaults = []) {
+    public function addFactorySeed(string $key, array $seed, array $defaults = [])
+    {
         $this->set($key, Factory::factory($seed, $defaults));
     }
 
-    public function addFactoryCallable(string $key, Callable $callable) {
+    public function addFactoryCallable(string $key, callable $callable)
+    {
         $this->set($key, $callable);
     }
 
-    public function addLazyInstance(string $key, array $seed, array $defaults = []) {
-        $this->set($key, function() use ($key, $seed, $defaults) {
-            $this->addInstance($key, Factory::factory($seed, $defaults));
-            return $this->_getConfig($key);
+    public function addLazyFactorySeed(string $key, array $seed, array $defaults = [])
+    {
+        $this->set($key, function () use ($key, $seed, $defaults) {
+            $this->addFactorySeed($key, $seed, $defaults);
+
+            return $this->get($key);
         });
     }
 }
