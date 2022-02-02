@@ -55,7 +55,6 @@ jobs:
       - name: "Run tests: SQLite (only for Phpunit)"
         if: startsWith(matrix.type, 'Phpunit')
         run: |
-          php demos/_demo-data/create-db.php
           vendor/bin/phpunit --exclude-group none --no-coverage -v
 
       - name: Check Coding Style (only for CodingStyle)
@@ -125,7 +124,6 @@ jobs:
 
       - name: "Run tests: SQLite"
         run: |
-          php demos/_demo-data/create-db.php
           php -d opcache.enable_cli=1 vendor/bin/phpunit --exclude-group none $(if [ -n "$LOG_COVERAGE" ]; then echo --coverage-text; else echo --no-coverage; fi) -v
           if [ -n "$LOG_COVERAGE" ]; then mv coverage/phpunit.cov coverage/phpunit-sqlite.cov; fi
 
