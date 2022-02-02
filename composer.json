@@ -47,10 +47,5 @@
             "ergebnis/composer-normalize": true
         },
         "sort-packages": true
-    },
-    "require-release": {
-        "php": ">=7.4 <8.2",
-        "atk4/core": "~3.1.0",
-        "psr/container": "^2.0"
     }
 }
