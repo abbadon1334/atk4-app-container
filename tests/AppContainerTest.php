@@ -89,11 +89,12 @@ class AppContainerTest extends TestCase
         $this->assertSame(4, $singleton->add(2, 2));
     }
 
-    function testLoadConfig(): void {
+    public function testLoadConfig(): void
+    {
         $container = new AppContainer();
-        $container->readConfig(__DIR__.'/data/config.php');
+        $container->readConfig(__DIR__ . '/data/config.php');
 
-        $this->assertEquals("loaded with config", $container->get('test'));
+        $this->assertSame('loaded with config', $container->get('test'));
     }
 }
 
