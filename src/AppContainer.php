@@ -16,16 +16,17 @@ class AppContainer implements ContainerInterface
         $this->config = new AppContainerConfig();
     }
 
-    public function readConfig(...$file)
+    public function readConfig(string ...$file): void
     {
-        $this->config->readConfig($file);
+        $this->config->readConfig($file, 'php');
     }
 
     public function get(string $id)
     {
         $value = $this->config->getConfig($id);
+
         if (is_callable($value)) {
-            return $value();
+            return $value($this);
         }
 
         return $value;
@@ -33,28 +34,31 @@ class AppContainer implements ContainerInterface
 
     public function has(string $id): bool
     {
-        return null !== $this->get($id);
+        return $this->get($id) !== null;
     }
 
-    public function set(string $id, $object)
+    /**
+     * @param mixed $object
+     */
+    public function set(string $id, $object): void
     {
         $this->config->setConfig($id, $object);
     }
 
-    public function addFactorySeed(string $key, array $seed, array $defaults = [])
-    {
-        $this->set($key, Factory::factory($seed, $defaults));
-    }
-
-    public function addFactoryCallable(string $key, callable $callable)
+    public function addFactory(string $key, callable $callable): void
     {
         $this->set($key, $callable);
     }
 
-    public function addLazyFactorySeed(string $key, array $seed, array $defaults = [])
+    public function addFactorySeed(string $key, array $seed, array $defaults = []): void
     {
-        $this->set($key, function () use ($key, $seed, $defaults) {
-            $this->addFactorySeed($key, $seed, $defaults);
+        $this->set($key, fn (AppContainer $container = null) => Factory::factory($seed, $defaults));
+    }
+
+    public function addSingletonSeed(string $key, array $seed, array $defaults = []): void
+    {
+        $this->set($key, function (self $container = null) use ($key, $seed, $defaults) {
+            $this->set($key, Factory::factory($seed, $defaults));
 
             return $this->get($key);
         });

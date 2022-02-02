@@ -1,3 +1,9 @@
-docs/
-.idea/
-composer.lock
+/composer.lock
+/build
+/vendor
+.DS_Store
+.idea
+/demos/db.sqlite
+/demos/db.php
+/demos/_demo-data/db.sqlite
+/demos/_demo-data/db.sqlite-journal
