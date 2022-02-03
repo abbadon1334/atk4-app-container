@@ -19,7 +19,7 @@ class AppContainer implements ContainerInterface
         self::$instance = $this;
     }
 
-    public static function instance() : AppContainer {
+    public static function instance() : self {
         return self::$instance;
     }
 
