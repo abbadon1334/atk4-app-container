@@ -9,11 +9,18 @@ use Psr\Container\ContainerInterface;
 
 class AppContainer implements ContainerInterface
 {
+    private static AppContainer $instance;
+
     protected AppContainerConfig $config;
 
     public function __construct()
     {
         $this->config = new AppContainerConfig();
+        self::$instance = $this;
+    }
+
+    public static function instance() : AppContainer {
+        return self::$instance;
     }
 
     public function readConfig(string ...$file): void
