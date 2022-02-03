@@ -96,6 +96,14 @@ class AppContainerTest extends TestCase
 
         $this->assertSame('loaded with config', $container->get('test'));
     }
+
+    public function testInstance(): void
+    {
+        $container = new AppContainer();
+        $container->readConfig(__DIR__ . '/data/config.php');
+
+        $this->assertSame(AppContainer::instance(), $container);
+    }
 }
 
 class TestFactory
