@@ -16,8 +16,8 @@
     ],
     "homepage": "https://github.com/abbadon1334/atk4-container",
     "require": {
-        "php": ">=7.4 <8.2",
-        "atk4/core": "~3.1.0",
+        "php": ">=7.4",
+        "atk4/core": "dev-develop",
         "psr/container": "^2.0"
     },
     "require-dev": {
@@ -44,7 +44,8 @@
     },
     "config": {
         "allow-plugins": {
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },
