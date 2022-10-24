@@ -25,8 +25,8 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "johnkary/phpunit-speedtrap": "^3.3",
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "^1.0",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan": "1.8.11",
+        "phpstan/phpstan-deprecation-rules": "1.0.0",
         "phpunit/phpunit": "^9.5.5",
         "symfony/console": "^4.4.30 || ^5.3.7"
     },
